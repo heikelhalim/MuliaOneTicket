@@ -16,7 +16,7 @@ return [
   'table-status'                     => 'Status',
   'table-last-updated'               => 'Last Updated',
   'table-priority'                   => 'Priority',
-  'table-agent'                      => 'Agent',
+  'table-agent'                      => 'Technical Personal',
   'table-category'                   => 'Category',
 
   // Datatables

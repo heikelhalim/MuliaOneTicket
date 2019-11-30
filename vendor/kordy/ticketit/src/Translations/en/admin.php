@@ -6,7 +6,7 @@ return [
   *  Constants
   */
   'nav-settings'                  => 'Settings',
-  'nav-agents'                    => 'Agents',
+  'nav-agents'                    => 'Technical Personals',
   'nav-dashboard'                 => 'Dashboard',
   'nav-categories'                => 'Categories',
   'nav-priorities'                => 'Priorities',
@@ -20,7 +20,7 @@ return [
   'table-action'                  => 'Action',
   'table-categories'              => 'Categories',
   'table-join-category'           => 'Joined Categories',
-  'table-remove-agent'            => 'Remove from agents',
+  'table-remove-agent'            => 'Remove from technical personals',
   'table-remove-administrator'    => 'Remove from administrators', // New
 
   'table-slug'                    => 'Slug',
@@ -75,14 +75,14 @@ return [
   'index-agents-chart'                  => 'Tickets distribution per Agent',
 
 // tickets-admin/agent/____
-  'agent-index-title'             => 'Agent Management',
-  'btn-create-new-agent'          => 'Create new agent',
-  'agent-index-no-agents'         => 'There are no agents, ',
-  'agent-index-create-new'        => 'Add agents',
-  'agent-create-title'            => 'Add Agent',
-  'agent-create-add-agents'       => 'Add Agents',
+  'agent-index-title'             => 'Technical Personal Management',
+  'btn-create-new-agent'          => 'Create new technical personal',
+  'agent-index-no-agents'         => 'There are no technical personal, ',
+  'agent-index-create-new'        => 'Add technical personals',
+  'agent-create-title'            => 'Add Technical Personal',
+  'agent-create-add-agents'       => 'Add Technical Personals',
   'agent-create-no-users'         => 'There are no user accounts, create user accounts first.',
-  'agent-create-select-user'      => 'Select user accounts to be added as agents',
+  'agent-create-select-user'      => 'Select user accounts to be added as technical personals',
 
 // tickets-admin/administrators/____
   'administrator-index-title'                   => 'Administrator Management',  //new
