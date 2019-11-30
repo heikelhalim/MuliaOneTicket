@@ -7,16 +7,26 @@
     @if(! $ticket->completed_at && $close_perm == 'yes')
             {!! link_to_route($setting->grab('main_route').'.complete', trans('ticketit::lang.btn-mark-complete'), $ticket->id,
                                 ['class' => 'btn btn-success']) !!}
+
+    {{-- Hide Reopen Ticket Button
+
     @elseif($ticket->completed_at && $reopen_perm == 'yes')
             {!! link_to_route($setting->grab('main_route').'.reopen', trans('ticketit::lang.reopen-ticket'), $ticket->id,
                                 ['class' => 'btn btn-success']) !!}
+    --}}
+                                        
     @endif
     @if($u->isAgent() || $u->isAdmin())
+
+    {{-- Hide Reopen Edit Button
         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ticket-edit-modal">
             {{ trans('ticketit::lang.btn-edit')  }}
         </button>
+    --}}
     @endif
+
     @if($u->isAdmin())
+
         @if($setting->grab('delete_modal_type') == 'builtin')
             {!! link_to_route(
                             $setting->grab('main_route').'.destroy', trans('ticketit::lang.btn-delete'), $ticket->id,
@@ -43,9 +53,14 @@
              >
               {{ trans('ticketit::lang.btn-delete') }}
             </button>
+            
+    
+
         @endif
             {!! CollectiveForm::close() !!}
 {{-- // END Modal Window: 1/2 --}}
+    
+  
     @endif
 </div>
 @stop
