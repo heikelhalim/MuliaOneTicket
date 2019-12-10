@@ -14,5 +14,5 @@ npm-debug.log
 yarn-error.log
 
 !/vendor/
-/vendor/*
+!/vendor/*
 !/vendor/kordy/
