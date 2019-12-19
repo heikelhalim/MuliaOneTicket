@@ -21,4 +21,30 @@ trait Purifiable
 
         return $this;
     }
+
+    public function setPurifiedReportDetails($rawHtml)
+    {
+        $this->report_details = Purifier::clean($rawHtml, ['HTML.Allowed' => '']);
+        $this->report_details_html = Purifier::clean($rawHtml, Setting::grab('purifier_config'));
+
+        return $this;
+    }
+
+    public function setPurifiedInProgress($rawHtml)
+    {
+        $this->in_progress_remarks = Purifier::clean($rawHtml, ['HTML.Allowed' => '']);
+        $this->in_progress_html = Purifier::clean($rawHtml, Setting::grab('purifier_config'));
+
+        return $this;
+    }
+
+    public function setPurifiedAfter($rawHtml)
+    {
+        $this->after_remarks = Purifier::clean($rawHtml, ['HTML.Allowed' => '']);
+        $this->after_remarks_html = Purifier::clean($rawHtml, Setting::grab('purifier_config'));
+
+        return $this;
+    }
+
+
 }

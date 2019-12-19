@@ -12,6 +12,8 @@ use Kordy\Ticketit\Models\Agent;
 use Kordy\Ticketit\Models\Category;
 use Kordy\Ticketit\Models\Setting;
 use Kordy\Ticketit\Models\Ticket;
+use Kordy\Ticketit\Models\Action;
+use Kordy\Ticketit\Models\Status;
 
 class TicketsController extends Controller
 {
@@ -182,10 +184,18 @@ class TicketsController extends Controller
             return Models\Status::all();
         });
 
+        $actions = Cache::remember('ticketit::actions', $time, function () {
+            return Models\Action::all();
+        });
+
+
+
         if (LaravelVersion::min('5.3.0')) {
-            return [$priorities->pluck('name', 'id'), $categories->pluck('name', 'id'), $statuses->pluck('name', 'id')];
+            return [$priorities->pluck('name', 'id'), $categories->pluck('name', 'id'), $statuses->pluck('name', 'id'),
+                    $actions->pluck('name', 'id')];
         } else {
-            return [$priorities->lists('name', 'id'), $categories->lists('name', 'id'), $statuses->lists('name', 'id')];
+            return [$priorities->lists('name', 'id'), $categories->lists('name', 'id'), $statuses->lists('name', 'id'),
+                    $actions->lists('name', 'id')];
         }
     }
 
@@ -221,7 +231,13 @@ class TicketsController extends Controller
 
         $ticket->subject = $request->subject;
 
+        //$ticket->report_details = $request->report_details;
+
         $ticket->setPurifiedContent($request->get('content'));
+        $ticket->setPurifiedReportDetails($request->get('report_details'));
+        
+        $ticket->report_no = '581-0000';
+        $ticket->complaint_by = $request->complaint_by;
 
         $ticket->priority_id = $request->priority_id;
         $ticket->category_id = $request->category_id;
@@ -248,7 +264,7 @@ class TicketsController extends Controller
     {
         $ticket = $this->tickets->findOrFail($id);
 
-        list($priority_lists, $category_lists, $status_lists) = $this->PCS();
+        list($priority_lists, $category_lists, $status_lists, $actions) = $this->PCS();
 
         $close_perm = $this->permToClose($id);
         $reopen_perm = $this->permToReopen($id);
@@ -263,8 +279,8 @@ class TicketsController extends Controller
         $comments = $ticket->comments()->paginate(Setting::grab('paginate_items'));
 
         return view('ticketit::tickets.show',
-            compact('ticket', 'status_lists', 'priority_lists', 'category_lists', 'agent_lists', 'comments',
-                'close_perm', 'reopen_perm'));
+            compact('ticket', 'status_lists', 'priority_lists', 'category_lists', 'comments',
+                'close_perm', 'reopen_perm','actions'));
     }
 
     /**
@@ -277,30 +293,48 @@ class TicketsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'subject'     => 'required|min:3',
-            'content'     => 'required|min:6',
-            'priority_id' => 'required|exists:ticketit_priorities,id',
-            'category_id' => 'required|exists:ticketit_categories,id',
-            'status_id'   => 'required|exists:ticketit_statuses,id',
-            'agent_id'    => 'required',
-        ]);
-
         $ticket = $this->tickets->findOrFail($id);
+        $status = Status::where('name', 'Resolved')->first();
 
-        $ticket->subject = $request->subject;
+        if ($request->updateflag == 'response')
+        {
+            $ticket->action_id = $request->action_id;
+            $ticket->technical_remarks = $request->technical_remarks;
+            $ticket->status_id = $status->id;
+            $ticket->setPurifiedInProgress($request->get('in_progress'));
+            $ticket->setPurifiedAfter($request->get('after'));
+            
 
-        $ticket->setPurifiedContent($request->get('content'));
-
-        $ticket->status_id = $request->status_id;
-        $ticket->category_id = $request->category_id;
-        $ticket->priority_id = $request->priority_id;
-
-        if ($request->input('agent_id') == 'auto') {
-            $ticket->autoSelectAgent();
-        } else {
-            $ticket->agent_id = $request->input('agent_id');
         }
+        else if ($request->updateflag == 'report')
+        {
+            $this->validate($request, [
+                'subject'     => 'required|min:3',
+                'content'     => 'required|min:6',
+                'priority_id' => 'required|exists:ticketit_priorities,id',
+                'category_id' => 'required|exists:ticketit_categories,id',
+                'status_id'   => 'required|exists:ticketit_statuses,id',
+                'agent_id'    => 'required',
+            ]);
+
+            $ticket->subject = $request->subject;
+
+            $ticket->setPurifiedContent($request->get('content'));
+    
+            $ticket->status_id = $request->status_id;
+            $ticket->category_id = $request->category_id;
+            $ticket->priority_id = $request->priority_id;
+    
+            if ($request->input('agent_id') == 'auto') {
+                $ticket->autoSelectAgent();
+            } else {
+                $ticket->agent_id = $request->input('agent_id');
+            }
+        
+        }
+
+
+
 
         $ticket->save();
 

@@ -110,6 +110,13 @@ class Ticket extends Model
         return $this->hasMany('Kordy\Ticketit\Models\Comment', 'ticket_id');
     }
 
+
+    public function action()
+    {
+        return $this->belongsTo('Kordy\Ticketit\Models\Action', 'action_id');
+    }
+
+
 //    /**
     //     * Get Ticket audits
     //     *

@@ -46,6 +46,7 @@ return [
   'btn-edit'                         => 'Edit',
   'btn-mark-complete'                => 'Mark Complete',
   'btn-submit'                       => 'Submit',
+  'btn-technician-form'              => 'Technician Form',
 
   'agent'                            => 'Agent',
   'category'                         => 'Category',
@@ -63,6 +64,22 @@ return [
   'responsible'                      => 'Responsible',
   'status'                           => 'Status',
   'subject'                          => 'Subject',
+  'created_date'                     => 'Created Date',
+  'created_time'                     => 'Created Time',
+  'report_details'                   => 'Report Details',
+  'picture_and_remarks'              => 'Picture And Remarks',
+  'outlet_id'                        => 'Outlet ID',
+  'report_no'                        => 'Report No.',
+  'report_date'                      => 'Report Date',
+  'report_time'                      => 'Report Time',
+  'action'                           => 'Action',
+  'assigned_technician'              => 'Assigned Technician',
+  'technical_remarks'                => 'Technical Remarks',
+  'complaint_by'                     => 'Complaint By',
+  'in_progress_picture_remarks'      => "In Progress",
+  'after_picture_remarks'            => "After",
+  
+
 
  /*
   *  Page specific
@@ -84,6 +101,11 @@ return [
   'create-new-ticket'                => 'Create New Ticket',
   'create-ticket-brief-issue'        => 'A brief of your issue ticket',
   'create-ticket-describe-issue'     => 'Describe your issue here in details',
+  'create-ticket-created-date'       => 'Job creation date',
+  'create-ticket-created-time'       => 'Job creation time',
+  'create-ticket-picture_remarks'    => 'Upload your picture and put some remarks',
+  'create-ticket-complaint-by'       => 'Enter your name',
+
 
   'show-ticket-title'                => 'Ticket',
   'show-ticket-js-delete'            => 'Are you sure you want to delete: ',

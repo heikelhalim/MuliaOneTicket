@@ -1,13 +1,14 @@
+<p><strong>Section 1 : Report By</strong></p>
 <div class="card mb-3">
     <div class="card-body row">
         <div class="col-md-6">
-            <p><strong>{{ trans('ticketit::lang.owner') }}</strong>{{ trans('ticketit::lang.colon') }}{{ $ticket->user_id == $u->id ? $u->name : $ticket->user->name }}</p>
+            <p><strong>{{ trans('ticketit::lang.outlet_id') }}</strong>{{ trans('ticketit::lang.colon') }}{{ $ticket->user_id == $u->id ? $u->name : $ticket->user->name }}</p>
             <p>
                 <strong>{{ trans('ticketit::lang.status') }}</strong>{{ trans('ticketit::lang.colon') }}
                 @if( $ticket->isComplete() && ! $setting->grab('default_close_status_id') )
-                    <span style="color: blue">Complete</span>
+                    <span style="color: blue"><strong>Complete</strong></span>
                 @else
-                    <span style="color: {{ $ticket->status->color }}">{{ $ticket->status->name }}</span>
+                    <span style="color: {{ $ticket->status->color }}"><strong>{{ $ticket->status->name }}</strong></span>
                 @endif
 
             </p>
@@ -17,13 +18,31 @@
                     {{ $ticket->priority->name }}
                 </span>
             </p>
+
+            <p>
+                <strong>{{ trans('ticketit::lang.report_details') }}</strong>{{ trans('ticketit::lang.colon') }}
+                <br>{!! $ticket->report_details !!}
+            </p>
+
+            <p>
+            <strong>{{ trans('ticketit::lang.picture_and_remarks') }}</strong>{{ trans('ticketit::lang.colon') }}
+            </p>
+            <p>
+                {!! $ticket->html !!}
+            </p>
+
+
         </div>
         <div class="col-md-6">
-            <p> <strong>{{ trans('ticketit::lang.responsible') }}</strong>{{ trans('ticketit::lang.colon') }}{{ $ticket->agent_id == $u->id ? $u->name : $ticket->agent->name }}</p>
+            <p> <strong>{{ trans('ticketit::lang.report_no') }}</strong>{{ trans('ticketit::lang.colon') }}
+               <!-- {{ $ticket->agent_id == $u->id ? $u->name : $ticket->agent->name }} -->
+                {{ $ticket->report_no }}
+            </p>
             <p>
                 <strong>{{ trans('ticketit::lang.category') }}</strong>{{ trans('ticketit::lang.colon') }}
                 <span style="color: {{ $ticket->category->color }}">
-                    {{ $ticket->category->name }}
+                    {{ $ticket->category->name }} 
+                  
                 </span>
             </p>
             <p> <strong>{{ trans('ticketit::lang.created') }}</strong>{{ trans('ticketit::lang.colon') }}{{ $ticket->created_at->diffForHumans() }}</p>
@@ -32,7 +51,7 @@
     </div>
 </div>
 
-{!! $ticket->html !!}
+
 
 {!! CollectiveForm::open([
                 'method' => 'DELETE',
@@ -45,10 +64,12 @@
 !!}
 {!! CollectiveForm::close() !!}
 
-
+{{--
 @if($u->isAgent() || $u->isAdmin())
     @include('ticketit::tickets.edit')
 @endif
+
+--}}
 
 {{-- // OR; Modal Window: 2/2 --}}
 @if($u->isAdmin())

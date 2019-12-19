@@ -12,6 +12,7 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
+                    {!! CollectiveForm::hidden('updateflag', 'report') !!}
                     {!! CollectiveForm::text('subject', $ticket->subject, ['class' => 'form-control', 'required']) !!}
                 </div>
                 <div class="form-group">

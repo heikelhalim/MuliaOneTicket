@@ -5,8 +5,6 @@
 @section('ticketit_header')
 <div>
     @if(! $ticket->completed_at && $close_perm == 'yes')
-            {!! link_to_route($setting->grab('main_route').'.complete', trans('ticketit::lang.btn-mark-complete'), $ticket->id,
-                                ['class' => 'btn btn-success']) !!}
 
     {{-- Hide Reopen Ticket Button
 
@@ -66,8 +64,35 @@
 @stop
 
 @section('ticketit_content')
+
     @include('ticketit::tickets.partials.ticket_body')
+
+    @if($ticket->status->name == 'Resolved')
+
+        @include('ticketit::tickets.partials.ticket_response')
+
+        @if( $u->isAgent() == false )
+  
+             @if( !$ticket->completed_at )
+                <p><strong>Section 3 : Completion Verification</strong></p>
+                {!! link_to_route($setting->grab('main_route').'.complete', trans('ticketit::lang.btn-mark-complete'), $ticket->id,
+                                    ['class' => 'btn btn-success']) !!}
+            @endif
+
+        @endif
+    
+    @elseif($ticket->status->name == 'New' && $u->isAgent())
+        
+       <p><strong>Section 2 : Technical Response</strong></p>
+       <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ticket-editresponse-modal">
+            {{ trans('ticketit::lang.btn-technician-form')  }}
+        </button>
+        @include('ticketit::tickets.editresponse')            
+    @endif
+
+
 @endsection
+
 
 @section('ticketit_extra_content')
     <h2 class="mt-5">{{ trans('ticketit::lang.comments') }}</h2>

@@ -14,11 +14,27 @@
                 <small class="form-text text-muted">{!! trans('ticketit::lang.create-ticket-brief-issue') !!}</small>
             </div>
         </div>
+
         <div class="form-group row">
-            {!! CollectiveForm::label('content', trans('ticketit::lang.description') . trans('ticketit::lang.colon'), ['class' => 'col-lg-2 col-form-label']) !!}
+            {!! CollectiveForm::label('complaint_by', trans('ticketit::lang.complaint_by') . trans('ticketit::lang.colon'), ['class' => 'col-lg-2 col-form-label']) !!}
+            <div class="col-lg-10">
+                {!! CollectiveForm::text('complaint_by', null, ['class' => 'form-control', 'required' => 'required']) !!}
+                <small class="form-text text-muted">{!! trans('ticketit::lang.create-ticket-complaint-by') !!}</small>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            {!! CollectiveForm::label('report_details', trans('ticketit::lang.report_details') . trans('ticketit::lang.colon'), ['class' => 'col-lg-2 col-form-label']) !!}
+            <div class="col-lg-10">
+                {!! CollectiveForm::textarea('report_details',null, ['class' => 'form-control', 'rows' => '5', 'required' => 'required'])  !!}
+                <small class="form-text text-muted">{!! trans('ticketit::lang.create-ticket-describe-issue') !!}</small>
+            </div>
+        </div>
+        <div class="form-group row">
+            {!! CollectiveForm::label('content', trans('ticketit::lang.picture_and_remarks') . trans('ticketit::lang.colon'), ['class' => 'col-lg-2 col-form-label']) !!}
             <div class="col-lg-10">
                 {!! CollectiveForm::textarea('content', null, ['class' => 'form-control summernote-editor', 'rows' => '5', 'required' => 'required']) !!}
-                <small class="form-text text-muted">{!! trans('ticketit::lang.create-ticket-describe-issue') !!}</small>
+                <small class="form-text text-muted">{!! trans('ticketit::lang.create-ticket-picture_remarks') !!}</small>
             </div>
         </div>
         <div class="form-row mt-5">
