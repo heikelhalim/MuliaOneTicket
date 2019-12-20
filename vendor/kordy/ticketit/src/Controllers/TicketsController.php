@@ -238,6 +238,8 @@ class TicketsController extends Controller
         
         $ticket->report_no = '581-0000';
         $ticket->complaint_by = $request->complaint_by;
+        $ticket->position = $request->position;
+
 
         $ticket->priority_id = $request->priority_id;
         $ticket->category_id = $request->category_id;

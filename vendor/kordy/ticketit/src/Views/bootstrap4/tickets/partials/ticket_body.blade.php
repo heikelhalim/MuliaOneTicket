@@ -3,6 +3,9 @@
     <div class="card-body row">
         <div class="col-md-6">
             <p><strong>{{ trans('ticketit::lang.outlet_id') }}</strong>{{ trans('ticketit::lang.colon') }}{{ $ticket->user_id == $u->id ? $u->name : $ticket->user->name }}</p>
+            <p><strong>{{ trans('ticketit::lang.complaint_by') }}</strong>{{ trans('ticketit::lang.colon') }}{{ $ticket->complaint_by }}</p>
+            <p><strong>{{ trans('ticketit::lang.position') }}</strong>{{ trans('ticketit::lang.colon') }}{{ $ticket->position }}</p>
+
             <p>
                 <strong>{{ trans('ticketit::lang.status') }}</strong>{{ trans('ticketit::lang.colon') }}
                 @if( $ticket->isComplete() && ! $setting->grab('default_close_status_id') )
@@ -45,8 +48,13 @@
                   
                 </span>
             </p>
-            <p> <strong>{{ trans('ticketit::lang.created') }}</strong>{{ trans('ticketit::lang.colon') }}{{ $ticket->created_at->diffForHumans() }}</p>
-            <p> <strong>{{ trans('ticketit::lang.last-update') }}</strong>{{ trans('ticketit::lang.colon') }}{{ $ticket->updated_at->diffForHumans() }}</p>
+            <p> <strong>{{ trans('ticketit::lang.created-date') }}</strong>{{ trans('ticketit::lang.colon') }}{{ $ticket->created_at->format('d/m/Y') }}</p>
+            <p> <strong>{{ trans('ticketit::lang.created-time') }}</strong>{{ trans('ticketit::lang.colon') }}{{ $ticket->created_at->format('h:i:s A') }}</p>
+
+            @if( $ticket->completed_at )
+            <p> <strong>{{ trans('ticketit::lang.completed-date') }}</strong>{{ trans('ticketit::lang.colon') }}{{ $ticket->completed_at->format('d/m/Y') }}</p>
+            <p> <strong>{{ trans('ticketit::lang.completed-time') }}</strong>{{ trans('ticketit::lang.colon') }}{{ $ticket->completed_at->format('h:i:s A') }}</p>
+            @endif
         </div>
     </div>
 </div>

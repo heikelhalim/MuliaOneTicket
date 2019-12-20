@@ -24,6 +24,15 @@
         </div>
 
         <div class="form-group row">
+            {!! CollectiveForm::label('position', trans('ticketit::lang.position') . trans('ticketit::lang.colon'), ['class' => 'col-lg-2 col-form-label']) !!}
+            <div class="col-lg-10">
+                {!! CollectiveForm::text('position', null, ['class' => 'form-control', 'required' => 'required']) !!}
+                <small class="form-text text-muted">{!! trans('ticketit::lang.create-ticket-position') !!}</small>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
             {!! CollectiveForm::label('report_details', trans('ticketit::lang.report_details') . trans('ticketit::lang.colon'), ['class' => 'col-lg-2 col-form-label']) !!}
             <div class="col-lg-10">
                 {!! CollectiveForm::textarea('report_details',null, ['class' => 'form-control', 'rows' => '5', 'required' => 'required'])  !!}

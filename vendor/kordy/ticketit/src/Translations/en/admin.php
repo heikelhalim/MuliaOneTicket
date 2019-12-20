@@ -13,6 +13,7 @@ return [
   'nav-statuses'                  => 'Statuses',
   'nav-configuration'             => 'Configuration',
   'nav-administrator'             => 'Administrator',  //new
+  'nav-users'                     => 'Users',
 
   'table-hash'                    => '#',
   'table-id'                      => 'ID',

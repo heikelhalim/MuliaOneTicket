@@ -6,8 +6,8 @@ return [
   *  Constants
   */
 
-  'nav-active-tickets'               => 'Active Tickets',
-  'nav-completed-tickets'            => 'Completed Tickets',
+  'nav-active-tickets'               => 'Active Jobs',
+  'nav-completed-tickets'            => 'Completed Jobs',
 
   // Tables
   'table-id'                         => '#',
@@ -53,6 +53,10 @@ return [
   'colon'                            => ': ',
   'comments'                         => 'Comments',
   'created'                          => 'Created',
+  'created-date'                     => 'Created Date',
+  'created-time'                     => 'Created Time',
+  'completed-date'                   => 'Completed Date',
+  'completed-time'                   => 'Completed Time',
   'description'                      => 'Description',
   'flash-x'                          => '×', // &times;
   'last-update'                      => 'Last Update',
@@ -78,6 +82,7 @@ return [
   'complaint_by'                     => 'Complaint By',
   'in_progress_picture_remarks'      => "In Progress",
   'after_picture_remarks'            => "After",
+  'position'                         => "Position",
   
 
 
@@ -89,8 +94,8 @@ return [
   'index-title'                      => 'Helpdesk main page',
 
 // tickets/____
-  'index-my-tickets'                 => 'My Tickets',
-  'btn-create-new-ticket'            => 'Create new ticket',
+  'index-my-tickets'                 => 'My Job',
+  'btn-create-new-ticket'            => 'Create new job',
   'index-complete-none'              => 'There are no complete tickets',
   'index-active-check'               => 'Be sure to check Active Tickets if you cannot find your ticket.',
   'index-active-none'                => 'There are no active tickets,',
@@ -98,13 +103,14 @@ return [
   'index-complete-check'             => 'Be sure to check Complete Tickets if you cannot find your ticket.',
 
   'create-ticket-title'              => 'New Ticket Form',
-  'create-new-ticket'                => 'Create New Ticket',
+  'create-new-ticket'                => 'Create New Job',
   'create-ticket-brief-issue'        => 'A brief of your issue ticket',
   'create-ticket-describe-issue'     => 'Describe your issue here in details',
   'create-ticket-created-date'       => 'Job creation date',
   'create-ticket-created-time'       => 'Job creation time',
   'create-ticket-picture_remarks'    => 'Upload your picture and put some remarks',
   'create-ticket-complaint-by'       => 'Enter your name',
+  'create-ticket-position'           => 'Enter your position in outlet',
 
 
   'show-ticket-title'                => 'Ticket',

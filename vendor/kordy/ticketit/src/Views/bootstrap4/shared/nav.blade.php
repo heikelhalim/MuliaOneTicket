@@ -53,6 +53,10 @@
                     {{ trans('ticketit::admin.nav-settings') }}
                 </a>
                 <div class="dropdown-menu">
+
+                    <a  class="dropdown-item {!! $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\UsersController@index').'*') ? "active" : "" !!}"
+                        href="{{ action('\Kordy\Ticketit\Controllers\UsersController@index') }}">{{ trans('ticketit::admin.nav-users') }}</a>
+
                     <a  class="dropdown-item {!! $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\StatusesController@index').'*') ? "active" : "" !!}"
                         href="{{ action('\Kordy\Ticketit\Controllers\StatusesController@index') }}">{{ trans('ticketit::admin.nav-statuses') }}</a>
                     
