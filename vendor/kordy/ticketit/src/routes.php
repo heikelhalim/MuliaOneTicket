@@ -159,6 +159,10 @@ Route::group(['middleware' => \Kordy\Ticketit\Helpers\LaravelVersion::authMiddle
             ],
         ]);
 
+        Route::get("/clear-cache", function() {
+            Artisan::call('cache:clear');
+            return "Cache is cleared";
+        });
 
         //Tickets demo data route (ex. http://url/tickets-admin/demo-seeds/)
         // Route::get("$admin_route/demo-seeds", 'Kordy\Ticketit\Controllers\InstallController@demoDataSeeder');
