@@ -36,4 +36,61 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    /**
+     * Get related agents.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tagents()
+    {
+        return $this->belongsToMany('\Kordy\Ticketit\Models\Agent', 'ticketit_categories_users', 'category_id', 'user_id');
+    }
+
+        /**
+     * Check if user is agent.
+     *
+     * @return bool
+     */
+    public static function isAgent($id = null)
+    {
+        if (isset($id)) {
+            $user = User::find($id);
+            if ($user->ticketit_agent) {
+                return true;
+            }
+
+            return false;
+        }
+        if (auth()->check()) {
+            if (auth()->user()->ticketit_agent) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if user is admin.
+     *
+     * @return bool
+     */
+    public static function isAdmin()
+    {
+        return auth()->check() && auth()->user()->ticketit_admin;
+    }
+
+
+        /**
+     * Check if user is Manager.
+     *
+     * @return bool
+     */
+    public static function isManager()
+    {
+        return auth()->check() && auth()->user()->ticketit_manager;
+    }
+
 }

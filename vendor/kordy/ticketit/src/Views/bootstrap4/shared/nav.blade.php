@@ -42,6 +42,7 @@
             <li role="presentation" class="nav-item dropdown">
 
                 <a class="nav-link dropdown-toggle {!!
+                    $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\UsersController@index').'*') ||
                     $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\StatusesController@index').'*') ||
                     $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\PrioritiesController@index').'*') ||
                     $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\AgentsController@index').'*') ||

@@ -156,6 +156,17 @@ class Agent extends User
         return $this->belongsToMany('Kordy\Ticketit\Models\Category', 'ticketit_categories_users', 'user_id', 'category_id');
     }
 
+        /**
+     * Get related categories.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function outlets()
+    {
+        return $this->belongsToMany('App\User', 'ticketit_categories_users', 'user_id', 'category_id');
+    }
+
+
     /**
      * Get related agent tickets (To be deprecated).
      */

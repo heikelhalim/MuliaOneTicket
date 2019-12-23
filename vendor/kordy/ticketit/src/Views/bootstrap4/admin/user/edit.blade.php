@@ -1,11 +1,11 @@
 @extends('ticketit::layouts.master')
-@section('page', trans('ticketit::admin.status-edit-title', ['name' => ucwords($status->name)]))
+@section('page', trans('ticketit::admin.user-edit-title', ['name' => ucwords($user->name)]))
 
 @section('ticketit_content') 
-    {!! CollectiveForm::model($status, [
-                                    'route' => [$setting->grab('admin_route').'.status.update', $status->id],
+    {!! CollectiveForm::model($user, [
+                                    'route' => [$setting->grab('admin_route').'.user.update', $user->id],
                                     'method' => 'PATCH'
                                     ]) !!}
-        @include('ticketit::admin.status.form', ['update', true])
+        @include('ticketit::admin.user.form', ['update', true])
     {!! CollectiveForm::close() !!}
 @stop

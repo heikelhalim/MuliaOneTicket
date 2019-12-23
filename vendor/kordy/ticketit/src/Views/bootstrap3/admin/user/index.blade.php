@@ -1,11 +1,11 @@
 @extends('ticketit::layouts.master')
 
-@section('page', trans('ticketit::admin.user-index-title'))
+@section('page', trans('ticketit::admin.status-index-title'))
 
 @section('ticketit_header')
 {!! link_to_route(
-    $setting->grab('admin_route').'.user.create',
-    trans('ticketit::admin.btn-create-new-user'), null,
+    $setting->grab('admin_route').'.status.create',
+    trans('ticketit::admin.btn-create-new-status'), null,
     ['class' => 'btn btn-primary'])
 !!}
 @stop
@@ -43,7 +43,7 @@
                             !!}
 
                             {!! link_to_route(
-                                                $setting->grab('admin_route').'.user.destroy', trans('ticketit::admin.btn-delete'), $user->id,
+                                                $setting->grab('admin_route').'.status.destroy', trans('ticketit::admin.btn-delete'), $user->id,
                                                 [
                                                 'class' => 'btn btn-danger deleteit',
                                                 'form' => "delete-$user->id",
@@ -53,7 +53,7 @@
                         {!! CollectiveForm::open([
                                         'method' => 'DELETE',
                                         'route' => [
-                                                    $setting->grab('admin_route').'.user.destroy',
+                                                    $setting->grab('admin_route').'.status.destroy',
                                                     $user->id
                                                     ],
                                         'id' => "delete-$user->id"

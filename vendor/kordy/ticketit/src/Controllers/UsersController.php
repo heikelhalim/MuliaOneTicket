@@ -5,10 +5,12 @@ namespace Kordy\Ticketit\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use Kordy\Ticketit\Models\Status;
+use App\User;
 use Kordy\Ticketit\Helpers\LaravelVersion;
+use Illuminate\Support\Facades\Hash;
 
-class StatusesController extends Controller
+
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,13 +19,15 @@ class StatusesController extends Controller
      */
     public function index()
     {
+
+        //dd("Test Index User");
         // seconds expected for L5.8<=, minutes before that
         $time = LaravelVersion::min('5.8') ? 60*60 : 60;
-        $statuses = \Cache::remember('ticketit::statuses', $time, function () {
-            return Status::all();
+        $users = \Cache::remember('ticketit::users', $time, function () {
+            return User::all();
         });
 
-        return view('ticketit::admin.status.index', compact('statuses'));
+        return view('ticketit::admin.user.index', compact('users'));
     }
 
     /**
@@ -33,7 +37,7 @@ class StatusesController extends Controller
      */
     public function create()
     {
-        return view('ticketit::admin.status.create');
+        return view('ticketit::admin.user.create');
     }
 
     /**
@@ -47,17 +51,40 @@ class StatusesController extends Controller
     {
         $this->validate($request, [
             'name'      => 'required',
-            'color'     => 'required',
+            'email'     => 'required',
+            'password'   => 'required',
+
         ]);
 
-        $status = new Status();
-        $status->create(['name' => $request->name, 'color' => $request->color]);
+        
 
-        Session::flash('status', trans('ticketit::lang.status-name-has-been-created', ['name' => $request->name]));
+        $user = new User();
 
-        \Cache::forget('ticketit::statuses');
+        $user->name = $request->name;
+        $user->email = $request->email; 
+        $user->password = Hash::make($request->password);
 
-        return redirect()->action('\Kordy\Ticketit\Controllers\StatusesController@index');
+        if ($request->type == '1')
+        {
+                $user->ticketit_agent = true;
+
+        }else if($request->type == '2')
+        {
+                $user->ticketit_outlet = true;
+    
+        }
+        else if ($request->type == '3')
+        {
+            $user->ticketit_manager = true;
+        }
+
+        $user->save();
+
+        Session::flash('user', trans('ticketit::lang.user-name-has-been-created', ['name' => $request->name]));
+
+        \Cache::forget('ticketit::users');
+
+        return redirect()->action('\Kordy\Ticketit\Controllers\UsersController@index');
     }
 
     /**
@@ -81,9 +108,9 @@ class StatusesController extends Controller
      */
     public function edit($id)
     {
-        $status = Status::findOrFail($id);
+        $user = User::findOrFail($id);
 
-        return view('ticketit::admin.status.edit', compact('status'));
+        return view('ticketit::admin.user.edit', compact('user'));
     }
 
     /**
@@ -108,7 +135,7 @@ class StatusesController extends Controller
 
         \Cache::forget('ticketit::statuses');
 
-        return redirect()->action('\Kordy\Ticketit\Controllers\StatusesController@index');
+        return redirect()->action('\Kordy\Ticketit\Controllers\UsersController@index');
     }
 
     /**
@@ -128,6 +155,6 @@ class StatusesController extends Controller
 
         \Cache::forget('ticketit::statuses');
 
-        return redirect()->action('\Kordy\Ticketit\Controllers\StatusesController@index');
+        return redirect()->action('\Kordy\Ticketit\Controllers\UsersController@index');
     }
 }

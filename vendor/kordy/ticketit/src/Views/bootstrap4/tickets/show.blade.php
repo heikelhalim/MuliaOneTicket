@@ -67,7 +67,7 @@
 
     @include('ticketit::tickets.partials.ticket_body')
 
-    @if($ticket->status->name == 'Resolved')
+    @if($ticket->status->name == 'Pending Verification')
 
         @include('ticketit::tickets.partials.ticket_response')
 

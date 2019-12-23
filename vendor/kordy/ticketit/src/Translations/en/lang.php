@@ -146,6 +146,10 @@ return [
   'status-name-has-been-deleted'   => 'The status :name has been deleted!',
   'status-all-tickets-here'        => 'All status related tickets here',
 
+// UsersController
+  'user-name-has-been-created'   => 'The user :name has been created!',
+
+
 // CommentsController
   'comment-has-been-added-ok'        => 'Comment has been added successfully',
 

@@ -20,7 +20,11 @@ class AgentsController extends Controller
 
     public function create()
     {
-        $users = Agent::paginate(Setting::grab('paginate_items'));
+        $users = Agent::where('ticketit_admin', '0')
+                        ->where('ticketit_outlet', '0')
+                        ->where('ticketit_manager', '0')
+                        ->paginate(Setting::grab('paginate_items'));
+                        
 
         return view('ticketit::admin.agent.create', compact('users'));
     }
@@ -47,7 +51,8 @@ class AgentsController extends Controller
 
     public function update($id, Request $request)
     {
-        $this->syncAgentCategories($id, $request);
+        //$this->syncAgentCategories($id, $request);
+        $this->syncAgentOutlets($id, $request);
 
         Session::flash('status', trans('ticketit::lang.agents-joined-categories-ok'));
 
@@ -119,4 +124,13 @@ class AgentsController extends Controller
         $agent = Agent::find($id);
         $agent->categories()->sync($form_cats);
     }
+
+    public function syncAgentOutlets($id, Request $request)
+    {
+        $form_cats = ($request->input('agent_outlets') == null) ? [] : $request->input('agent_outlets');
+        $agent = Agent::find($id);
+        $agent->outlets()->sync($form_cats);
+    }
+
+
 }

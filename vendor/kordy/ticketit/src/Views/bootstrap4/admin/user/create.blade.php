@@ -1,8 +1,8 @@
 @extends('ticketit::layouts.master')
-@section('page', trans('ticketit::admin.status-create-title'))
+@section('page', trans('ticketit::admin.user-create-title'))
 
 @section('ticketit_content') 
-    {!! CollectiveForm::open(['route'=> $setting->grab('admin_route').'.status.store', 'method' => 'POST', 'class' => '']) !!}
-        @include('ticketit::admin.status.form')
+    {!! CollectiveForm::open(['route'=> $setting->grab('admin_route').'.user.store', 'method' => 'POST', 'class' => '']) !!}
+        @include('ticketit::admin.user.form')
     {!! CollectiveForm::close() !!}
 @stop

@@ -14,6 +14,8 @@ use Kordy\Ticketit\Models\Setting;
 use Kordy\Ticketit\Models\Ticket;
 use Kordy\Ticketit\Models\Action;
 use Kordy\Ticketit\Models\Status;
+use App\User;
+
 
 class TicketsController extends Controller
 {
@@ -144,9 +146,10 @@ class TicketsController extends Controller
      */
     public function index()
     {
+        $usersession = auth()->user();
         $complete = false;
 
-        return view('ticketit::index', compact('complete'));
+        return view('ticketit::index', compact('complete','usersession'));
     }
 
     /**
@@ -156,9 +159,10 @@ class TicketsController extends Controller
      */
     public function indexComplete()
     {
+        $usersession = auth()->user();
         $complete = true;
 
-        return view('ticketit::index', compact('complete'));
+        return view('ticketit::index', compact('complete','usersession'));
     }
 
     /**
@@ -224,14 +228,15 @@ class TicketsController extends Controller
             'subject'     => 'required|min:3',
             'content'     => 'required|min:6',
             'priority_id' => 'required|exists:ticketit_priorities,id',
-            'category_id' => 'required|exists:ticketit_categories,id',
         ]);
+
+        $user = new User();
+        
+        $agentmana = User::findOrFail(auth()->user()->id);
 
         $ticket = new Ticket();
 
         $ticket->subject = $request->subject;
-
-        //$ticket->report_details = $request->report_details;
 
         $ticket->setPurifiedContent($request->get('content'));
         $ticket->setPurifiedReportDetails($request->get('report_details'));
@@ -246,7 +251,7 @@ class TicketsController extends Controller
 
         $ticket->status_id = Setting::grab('default_status_id');
         $ticket->user_id = auth()->user()->id;
-        $ticket->autoSelectAgent();
+        $ticket->agent_id = $agentmana->tagents[0]->id;
 
         $ticket->save();
 
@@ -296,7 +301,7 @@ class TicketsController extends Controller
     public function update(Request $request, $id)
     {
         $ticket = $this->tickets->findOrFail($id);
-        $status = Status::where('name', 'Resolved')->first();
+        $status = Status::where('name', 'Pending Verification')->first();
 
         if ($request->updateflag == 'response')
         {
@@ -375,6 +380,10 @@ class TicketsController extends Controller
         if ($this->permToClose($id) == 'yes') {
             $ticket = $this->tickets->findOrFail($id);
             $ticket->completed_at = Carbon::now();
+
+            $status = Status::where('name', 'Resolved')->first();
+
+            $ticket->status_id = $status->id;
 
             if (Setting::grab('default_close_status_id')) {
                 $ticket->status_id = Setting::grab('default_close_status_id');

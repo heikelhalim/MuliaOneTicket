@@ -128,6 +128,16 @@ return [
   'status-create-color'           => 'Color',
   'status-edit-title'             => 'Edit Status: :name',
 
+// tickets-admin/status/____
+  'user-index-title'              => 'Users Management',
+  'btn-create-new-user'           => 'Create new user',
+  'user-create-title'             => 'Create New USer',
+  'user-create-name'              => 'User',
+  'user-create-email'             => 'Email',
+  'user-create-password'          => 'Password',
+  'user-edit-title'               => 'Edit User: :name',
+  'user-create-type'              => 'Type',
+
 // tickets-admin/configuration/____
   'config-index-title'            => 'Configuration Settings',
   'config-index-subtitle'         => 'Settings',

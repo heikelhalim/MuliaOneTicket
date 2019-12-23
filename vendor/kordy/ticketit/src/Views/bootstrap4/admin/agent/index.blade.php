@@ -24,8 +24,8 @@
                 <tr>
                     <th>{{ trans('ticketit::admin.table-id') }}</th>
                     <th>{{ trans('ticketit::admin.table-name') }}</th>
-                    <th>{{ trans('ticketit::admin.table-categories') }}</th>
-                    <th>{{ trans('ticketit::admin.table-join-category') }}</th>
+                    <th>Outlets</th>
+                    <th>Join Outlets</th>
                     <th>{{ trans('ticketit::admin.table-remove-agent') }}</th>
                 </tr>
             </thead>
@@ -39,30 +39,20 @@
                         {{ $agent->name }}
                     </td>
                     <td>
-                        @foreach($agent->categories as $category)
-                            <span style="color: {{ $category->color }}">
-                                {{  $category->name }}
-                            </span>
+                        @foreach($agent->outlets as $outlet)
+                                {{  $outlet->name }}
                         @endforeach
                     </td>
                     <td>
-                        {!! CollectiveForm::open([
-                                        'method' => 'PATCH',
-                                        'route' => [
-                                                    $setting->grab('admin_route').'.agent.update',
-                                                    $agent->id
-                                                    ],
-                                        ]) !!}
-                        @foreach(\Kordy\Ticketit\Models\Category::all() as $agent_cat)
-                            <input name="agent_cats[]"
-                                   type="checkbox"
-                                   class="form-check-input"
-                                   value="{{ $agent_cat->id }}"
-                                   {!! ($agent_cat->agents()->where("id", $agent->id)->count() > 0) ? "checked" : ""  !!}
-                                   > {{ $agent_cat->name }}
-                        @endforeach
-                        {!! CollectiveForm::submit(trans('ticketit::admin.btn-join'), ['class' => 'btn btn-info btn-sm']) !!}
-                        {!! CollectiveForm::close() !!}
+                    
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target=
+                        "#ticket-listoutlet-modal{{ $loop->iteration }}">
+                        Select Outlets
+                        </button>
+
+                        <div class="modal fade" id="ticket-listoutlet-modal{{ $loop->iteration }}" tabindex="-1" role="dialog" aria-labelledby="ticket-edit-modal-Label" aria-hidden="true">
+                        @include('ticketit::.admin.agent.listoutlets')            
+                        </div>
                     </td>
                     <td>
                         {!! CollectiveForm::open([

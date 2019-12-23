@@ -147,15 +147,15 @@ Route::group(['middleware' => \Kordy\Ticketit\Helpers\LaravelVersion::authMiddle
         ]);
 
         //Ticket statuses admin routes (ex. http://url/tickets-admin/users)
-        Route::resource("$admin_route_path/users", 'Kordy\Ticketit\Controllers\UsersController', [
+        Route::resource("$admin_route_path/user", 'Kordy\Ticketit\Controllers\UsersController', [
             'names' => [
-                'index'   => "$admin_route.status.index",
-                'store'   => "$admin_route.status.store",
-                'create'  => "$admin_route.status.create",
-                'update'  => "$admin_route.status.update",
-                'show'    => "$admin_route.status.show",
-                'destroy' => "$admin_route.status.destroy",
-                'edit'    => "$admin_route.status.edit",
+                'index'   => "$admin_route.user.index",
+                'store'   => "$admin_route.user.store",
+                'create'  => "$admin_route.user.create",
+                'update'  => "$admin_route.user.update",
+                'show'    => "$admin_route.user.show",
+                'destroy' => "$admin_route.user.destroy",
+                'edit'    => "$admin_route.user.edit",
             ],
         ]);
 
