@@ -15,13 +15,13 @@
 //    return view('welcome');
 //});
 
-//Route::get('/', function () {
-//	if(Auth::guest()){
-//    	return view('welcome');
-//	}else{
-//		return redirect('/home');
-//	}
-//});
+Route::get('/', function () {
+	if(Auth::guest()){
+    	return view('welcome');
+	}else{
+		return redirect('/home');
+	}
+});
 
 
 
