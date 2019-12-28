@@ -43,7 +43,6 @@
 
                 <a class="nav-link dropdown-toggle {!!
                     $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\UsersController@index').'*') ||
-                    $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\StatusesController@index').'*') ||
                     $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\PrioritiesController@index').'*') ||
                     $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\AgentsController@index').'*') ||
                     $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\CategoriesController@index').'*') ||
@@ -58,9 +57,6 @@
                     <a  class="dropdown-item {!! $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\UsersController@index').'*') ? "active" : "" !!}"
                         href="{{ action('\Kordy\Ticketit\Controllers\UsersController@index') }}">{{ trans('ticketit::admin.nav-users') }}</a>
 
-                    <a  class="dropdown-item {!! $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\StatusesController@index').'*') ? "active" : "" !!}"
-                        href="{{ action('\Kordy\Ticketit\Controllers\StatusesController@index') }}">{{ trans('ticketit::admin.nav-statuses') }}</a>
-                    
                     <a  class="dropdown-item {!! $tools->fullUrlIs(action('\Kordy\Ticketit\Controllers\PrioritiesController@index').'*') ? "active" : "" !!}"
                         href="{{ action('\Kordy\Ticketit\Controllers\PrioritiesController@index') }}">{{ trans('ticketit::admin.nav-priorities') }}</a>
                     

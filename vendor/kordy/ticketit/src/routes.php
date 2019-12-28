@@ -73,19 +73,6 @@ Route::group(['middleware' => \Kordy\Ticketit\Helpers\LaravelVersion::authMiddle
         ]);
         Route::get($admin_route_path, 'Kordy\Ticketit\Controllers\DashboardController@index');
 
-        //Ticket statuses admin routes (ex. http://url/tickets-admin/status)
-        Route::resource("$admin_route_path/status", 'Kordy\Ticketit\Controllers\StatusesController', [
-            'names' => [
-                'index'   => "$admin_route.status.index",
-                'store'   => "$admin_route.status.store",
-                'create'  => "$admin_route.status.create",
-                'update'  => "$admin_route.status.update",
-                'show'    => "$admin_route.status.show",
-                'destroy' => "$admin_route.status.destroy",
-                'edit'    => "$admin_route.status.edit",
-            ],
-        ]);
-
         //Ticket priorities admin routes (ex. http://url/tickets-admin/priority)
         Route::resource("$admin_route_path/priority", 'Kordy\Ticketit\Controllers\PrioritiesController', [
             'names' => [
