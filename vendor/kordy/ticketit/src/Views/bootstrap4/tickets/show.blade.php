@@ -1,6 +1,6 @@
 @extends('ticketit::layouts.master')
 @section('page', trans('ticketit::lang.show-ticket-title') . trans('ticketit::lang.colon') . $ticket->subject)
-@section('page_title', 'Subject : '.$ticket->subject)
+@section('page_title', '')
 
 @section('ticketit_header')
 <div>
@@ -42,7 +42,7 @@
         @if( $u->isAgent() == false )
   
              @if( !$ticket->completed_at )
-                <p><strong>Section 3 : Completion Verification</strong></p>
+                <p><strong><i>Section 3 : Completion Verification</i></strong></p>
                 {!! link_to_route($setting->grab('main_route').'.complete', trans('ticketit::lang.btn-mark-complete'), $ticket->id,
                                     ['class' => 'btn btn-success']) !!}
             @endif
@@ -51,7 +51,7 @@
     
     @elseif($ticket->status->name == 'New' && $u->isAgent())
         
-       <p><strong>Section 2 : Technical Response</strong></p>
+       <p><strong><i>Section 2 : Technical Response</i></strong></p>
        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ticket-editresponse-modal">
             {{ trans('ticketit::lang.btn-technician-form')  }}
         </button>

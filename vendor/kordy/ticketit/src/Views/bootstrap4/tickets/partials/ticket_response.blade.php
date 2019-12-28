@@ -1,4 +1,4 @@
-<p><strong>Section 2 : Technical Response</strong></p>
+<p><strong><i>Section 2 : Technical Response</i></strong></p>
 <div class="card mb-3">
     <div class="card-body row">
         <div class="col-md-6">

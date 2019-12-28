@@ -156,7 +156,7 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 44px;
             }
 
             .links > a {
@@ -196,7 +196,10 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    {{ config('app.name') }}
+                    
+                    <br>
+                    <img src="{{ asset('/muliaonelogo.jpg') }}"  width="180" height="180" > <br>
+                    <strong>{{ config('app.name') }}</strong>
                     {{-- This is not nice --}}
                     {{-- However probably the first you'll do after install, --}}
                     {{-- is to delete this file, so who cares? --}}
