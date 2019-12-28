@@ -48,6 +48,10 @@
                   
                 </span>
             </p>
+            <p>
+                <strong>{{ 'Subcategory' }}</strong>{{ trans('ticketit::lang.colon') }}
+                    {{ $ticket->subcategory->name }} 
+            </p>
             <p> <strong>{{ trans('ticketit::lang.created-date') }}</strong>{{ trans('ticketit::lang.colon') }}{{ $ticket->created_at->format('d/m/Y') }}</p>
             <p> <strong>{{ trans('ticketit::lang.created-time') }}</strong>{{ trans('ticketit::lang.colon') }}{{ $ticket->created_at->format('h:i:s A') }}</p>
 

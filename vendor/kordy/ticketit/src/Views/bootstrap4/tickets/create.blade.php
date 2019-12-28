@@ -53,14 +53,23 @@
                     {!! CollectiveForm::select('priority_id', $priorities, null, ['class' => 'form-control', 'required' => 'required']) !!}
                 </div>
             </div>
-            <div class="form-group offset-lg-1 col-lg-4 row">
+        </div>
+        <div class="form-row mt-5">
+            <div class="form-group col-lg-4 row">
                 {!! CollectiveForm::label('category', trans('ticketit::lang.category') . trans('ticketit::lang.colon'), ['class' => 'col-lg-6 col-form-label']) !!}
                 <div class="col-lg-6">
                     {!! CollectiveForm::select('category_id', $categories, null, ['class' => 'form-control', 'required' => 'required']) !!}
                 </div>
             </div>
+            <div class="form-group offset-lg-1 col-lg-4 row">
+                {!! CollectiveForm::label('subcategory', 'SubCategory' . trans('ticketit::lang.colon'), ['class' => 'col-lg-6 col-form-label']) !!}
+                <div class="col-lg-6">
+                    {!! CollectiveForm::select('subcategory_id', $subcategories, null, ['class' => 'form-control', 'required' => 'required']) !!}
+                </div>
+            </div>
             {!! CollectiveForm::hidden('agent_id', 'auto') !!}
         </div>
+
         <br>
         <div class="form-group row">
             <div class="col-lg-10 offset-lg-2">
@@ -68,6 +77,38 @@
                 {!! CollectiveForm::submit(trans('ticketit::lang.btn-submit'), ['class' => 'btn btn-primary']) !!}
             </div>
         </div>
+
+
+    <script type="text/javascript">
+        jQuery(document).ready(function ()
+        {
+                jQuery('select[name="category_id"]').on('change',function(){
+
+                var countryID = jQuery(this).val();
+
+                if(countryID)
+                {
+                    jQuery.ajax({
+                        url : 'dropdownlist/subcategory/' +countryID,
+                        type : "GET",
+                        dataType : "json",
+                        success:function(data)
+                        {
+                            console.log(data);
+                            jQuery('select[name="subcategory_id"]').empty();
+                            jQuery.each(data, function(key,value){
+                            $('select[name="subcategory_id"]').append('<option value="'+ key +'">'+ value +'</option>');
+                            });
+                        }
+                    });
+                }
+                else
+                {
+                    $('select[name="subcategory_id"]').empty();
+                }
+                });
+        });
+    </script>
     {!! CollectiveForm::close() !!}
 @endsection
 

@@ -80,6 +80,17 @@ class Ticket extends Model
         return $this->belongsTo('Kordy\Ticketit\Models\Category', 'category_id');
     }
 
+        /**
+     * Get Ticket subcategory.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function subcategory()
+    {
+        return $this->belongsTo('Kordy\Ticketit\Models\SubCategory', 'subcategory_id');
+    }
+
+
     /**
      * Get Ticket owner.
      *

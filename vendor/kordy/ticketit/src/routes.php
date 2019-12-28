@@ -24,6 +24,11 @@ Route::group(['middleware' => \Kordy\Ticketit\Helpers\LaravelVersion::authMiddle
                 $field_name => 'ticket',
             ],
         ]);
+  
+    //Get subcategory for dropdown category in create form
+    Route::get("$main_route_path/dropdownlist/subcategory/{id}",
+    'Kordy\Ticketit\Controllers\TicketsController@getSubCategory');
+        
 
     //Ticket Comments public route
     $field_name = last(explode('/', "$main_route_path-comment"));

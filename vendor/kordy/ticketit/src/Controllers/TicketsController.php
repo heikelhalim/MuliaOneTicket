@@ -14,6 +14,7 @@ use Kordy\Ticketit\Models\Setting;
 use Kordy\Ticketit\Models\Ticket;
 use Kordy\Ticketit\Models\Action;
 use Kordy\Ticketit\Models\Status;
+use Kordy\Ticketit\Models\SubCategory;
 use App\User;
 
 
@@ -192,14 +193,18 @@ class TicketsController extends Controller
             return Models\Action::all();
         });
 
+        $subcategories = Cache::remember('ticketit::subcategories', $time, function () {
+            return Models\SubCategory::where('id_categories', 1)->get();
+        });
+
 
 
         if (LaravelVersion::min('5.3.0')) {
             return [$priorities->pluck('name', 'id'), $categories->pluck('name', 'id'), $statuses->pluck('name', 'id'),
-                    $actions->pluck('name', 'id')];
+                    $actions->pluck('name', 'id'), $subcategories->pluck('name', 'id')];
         } else {
             return [$priorities->lists('name', 'id'), $categories->lists('name', 'id'), $statuses->lists('name', 'id'),
-                    $actions->lists('name', 'id')];
+                    $actions->lists('name', 'id'), $subcategories->lists('name', 'id')];
         }
     }
 
@@ -210,9 +215,9 @@ class TicketsController extends Controller
      */
     public function create()
     {
-        list($priorities, $categories) = $this->PCS();
+        list($priorities, $categories, $statuses, $actions, $subcategories ) = $this->PCS();
 
-        return view('ticketit::tickets.create', compact('priorities', 'categories'));
+        return view('ticketit::tickets.create', compact('priorities', 'categories', 'subcategories'));
     }
 
     /**
@@ -248,6 +253,7 @@ class TicketsController extends Controller
 
         $ticket->priority_id = $request->priority_id;
         $ticket->category_id = $request->category_id;
+        $ticket->subcategory_id = $request->subcategory_id;
 
         $ticket->status_id = Setting::grab('default_status_id');
         $ticket->user_id = auth()->user()->id;
@@ -571,5 +577,12 @@ class TicketsController extends Controller
         $performance_average = $performance_count / $counter;
 
         return $performance_average;
+    }
+
+
+    public function getSubCategory($id) 
+    {   
+            $states = SubCategory::where("id_categories",$id)->pluck("name","id");
+            return json_encode($states);
     }
 }
