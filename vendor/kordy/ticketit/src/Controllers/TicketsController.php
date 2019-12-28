@@ -245,8 +245,8 @@ class TicketsController extends Controller
 
         $ticket->setPurifiedContent($request->get('content'));
         $ticket->setPurifiedReportDetails($request->get('report_details'));
-        
-        $ticket->report_no = '581-0000';
+      
+        $ticket->report_no = 'MOE-'.hexdec(uniqid());
         $ticket->complaint_by = $request->complaint_by;
         $ticket->position = $request->position;
 
