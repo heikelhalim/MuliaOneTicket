@@ -24,6 +24,8 @@
                 <tr>
                     <th>{{ trans('ticketit::admin.table-id') }}</th>
                     <th>{{ trans('ticketit::admin.table-name') }}</th>
+                    <th>Email</th>
+                    <th>Role</th>
                     <th>{{ trans('ticketit::admin.table-action') }}</th>
                 </tr>
             </thead>
@@ -37,11 +39,28 @@
                         {{ $user->name }}
                     </td>
                     <td>
+                        {{ $user->email }}
+                    </td>
+                    <td>
+                        {{$user->isAgent()}}
+                        @if( $user->roleTechnicalPersonal())
+                            Technical Personal
+                        @elseif( $user->roleManager())
+                            Manager
+                        @elseif( $user->roleAdmin())
+                            Admin
+                        @elseif( $user->roleOutlet())
+                            Outlet
+                        @endif                        
+                    </td>
+                    <td>
                         {!! link_to_route(
                                                 $setting->grab('admin_route').'.user.edit', trans('ticketit::admin.btn-edit'), $user->id,
                                                 ['class' => 'btn btn-info'] )
                             !!}
 
+                            {{--
+                            
                             {!! link_to_route(
                                                 $setting->grab('admin_route').'.user.destroy', trans('ticketit::admin.btn-delete'), $user->id,
                                                 [
@@ -60,6 +79,8 @@
                                         ])
                         !!}
                         {!! CollectiveForm::close() !!}
+
+                        --}}
                     </td>
                 </tr>
             @endforeach

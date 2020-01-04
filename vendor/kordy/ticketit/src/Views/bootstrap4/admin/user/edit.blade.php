@@ -6,6 +6,6 @@
                                     'route' => [$setting->grab('admin_route').'.user.update', $user->id],
                                     'method' => 'PATCH'
                                     ]) !!}
-        @include('ticketit::admin.user.form', ['update', true])
+        @include('ticketit::admin.user.editform', ['update', true])
     {!! CollectiveForm::close() !!}
 @stop

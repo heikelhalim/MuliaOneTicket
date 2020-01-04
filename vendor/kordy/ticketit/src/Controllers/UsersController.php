@@ -124,16 +124,18 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name'      => 'required',
-            'color'     => 'required',
+            'password'   => 'required',
         ]);
 
-        $status = Status::findOrFail($id);
-        $status->update(['name' => $request->name, 'color' => $request->color]);
+        $user = User::findOrFail($id);
+        
+        $user->password = Hash::make($request->password);
 
-        Session::flash('status', trans('ticketit::lang.status-name-has-been-modified', ['name' => $request->name]));
+        $user->save();
 
-        \Cache::forget('ticketit::statuses');
+        Session::flash('user', 'Password updated.', ['name' => $user->name]);
+
+        Cache::forget('ticketit::users');
 
         return redirect()->action('\Kordy\Ticketit\Controllers\UsersController@index');
     }

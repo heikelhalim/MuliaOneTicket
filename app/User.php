@@ -93,4 +93,35 @@ class User extends Authenticatable
         return auth()->check() && auth()->user()->ticketit_manager;
     }
 
+            /**
+     * Check if user is Manager.
+     *
+     * @return bool
+     */
+    public function isOutlet()
+    {
+        return auth()->check() && auth()->user()->ticketit_outlet;
+    }
+
+
+    public function roleOutlet()
+    {
+        return $this->ticketit_outlet;
+    }
+
+    public function roleManager()
+    {
+        return $this->ticketit_manager;
+    }
+
+    public function roleAdmin()
+    {
+        return $this->ticketit_admin;
+    }
+
+    public function roleTechnicalPersonal()
+    {
+        return $this->ticketit_agent;
+    }
+
 }

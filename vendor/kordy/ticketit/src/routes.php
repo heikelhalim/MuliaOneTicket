@@ -99,18 +99,18 @@ Route::group(['middleware' => \Kordy\Ticketit\Helpers\LaravelVersion::authMiddle
             ],
         ]);
 
-        //Agents management routes (ex. http://url/tickets-admin/agent)
-        Route::resource("$admin_route_path/category", 'Kordy\Ticketit\Controllers\CategoriesController', [
-            'names' => [
-                'index'   => "$admin_route.category.index",
-                'store'   => "$admin_route.category.store",
-                'create'  => "$admin_route.category.create",
-                'update'  => "$admin_route.category.update",
-                'show'    => "$admin_route.category.show",
-                'destroy' => "$admin_route.category.destroy",
-                'edit'    => "$admin_route.category.edit",
-            ],
-        ]);
+        //Categories management routes (ex. http://url/tickets-admin/category)
+     //   Route::resource("$admin_route_path/category", 'Kordy\Ticketit\Controllers\CategoriesController', [
+     //       'names' => [
+     //           'index'   => "$admin_route.category.index",
+     //           'store'   => "$admin_route.category.store",
+     //           'create'  => "$admin_route.category.create",
+     //           'update'  => "$admin_route.category.update",
+     //           'show'    => "$admin_route.category.show",
+     //           'destroy' => "$admin_route.category.destroy",
+     //           'edit'    => "$admin_route.category.edit",
+     //       ],
+     //   ]);
 
         //Settings configuration routes (ex. http://url/tickets-admin/configuration)
         Route::resource("$admin_route_path/configuration", 'Kordy\Ticketit\Controllers\ConfigurationsController', [
