@@ -54,11 +54,14 @@
 				},
 			},
 	        columns: [
-	            { data: 'id', name: 'ticketit.id' },
+	         //   { data: 'id', name: 'ticketit.id' },
+				{ data: 'reportno', name: 'reportno' },
 	            { data: 'subject', name: 'subject' },
 	            { data: 'status', name: 'ticketit_statuses.name' },
 	            { data: 'updated_at', name: 'ticketit.updated_at' },
+				@if( $u->isAgent() == false)
             	{ data: 'agent', name: 'users.name' },
+	            @endif
 	            @if( $u->isAgent() || $u->isAdmin() )
 		            { data: 'priority', name: 'ticketit_priorities.name' },
 	            	{ data: 'owner', name: 'users.name' },
