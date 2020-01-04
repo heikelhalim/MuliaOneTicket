@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'm1eapps@muliagroups.com'),
-              'name' => env('MAIL_FROM_NAME', 'm1eapps@muliagroups.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'm1eapps0000@gmail.com'),
+              'name' => env('MAIL_FROM_NAME', 'm1eapps0000@gmail.com'),
     ],
 
     /*
@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
 
     /*
     |--------------------------------------------------------------------------
