@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'mail.muliagroups.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'postmaster@sandbox3ff05edaea8d41d8a92ffb600e1d0112.mailgun.org'),
-        'name' => env('MAIL_FROM_NAME', 'postmaster@sandbox3ff05edaea8d41d8a92ffb600e1d0112.mailgun.org'),
+        'address' => env('MAIL_FROM_ADDRESS', 'm1eapps@muliagroups.com'),
+              'name' => env('MAIL_FROM_NAME', 'm1eapps@muliagroups.com'),
     ],
 
     /*
