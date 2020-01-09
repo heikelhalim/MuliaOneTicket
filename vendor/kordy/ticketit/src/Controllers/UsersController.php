@@ -23,9 +23,7 @@ class UsersController extends Controller
         //dd("Test Index User");
         // seconds expected for L5.8<=, minutes before that
         $time = LaravelVersion::min('5.8') ? 60*60 : 60;
-        $users = \Cache::remember('ticketit::users', $time, function () {
-            return User::all();
-        });
+        $users = User::all();
 
         return view('ticketit::admin.user.index', compact('users'));
     }

@@ -200,6 +200,8 @@
                     <br>
                     <img src="{{ asset('/muliaonelogo.jpg') }}"  width="180" height="180" > <br>
                     <strong>{{ config('app.name') }}</strong>
+                    <strong>Online Job Ticketing System</strong>
+
                     {{-- This is not nice --}}
                     {{-- However probably the first you'll do after install, --}}
                     {{-- is to delete this file, so who cares? --}}
@@ -258,7 +260,7 @@
 
                 <footer>
                     <div class="container text-center">
-                        <p>© 2018 <a href="https://aexis.com.my"></a> Mulia One Sdn Bhd. All Rights Reserved</p>
+                        <p>© 2020 <a href="https://aexis.com.my"></a> Mulia One Sdn Bhd. All Rights Reserved</p>
                     </div>
         		</footer>
             </div>

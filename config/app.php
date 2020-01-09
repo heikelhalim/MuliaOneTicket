@@ -16,7 +16,7 @@ return [
     */
 
     //'name' => env('APP_NAME', 'Mulia One Eticket'),
-    'name' => 'Mulia One Eticket',
+    'name' => 'M1e Apps',
 
     /*
     |--------------------------------------------------------------------------
