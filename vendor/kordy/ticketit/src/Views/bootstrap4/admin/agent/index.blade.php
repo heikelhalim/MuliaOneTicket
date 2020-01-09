@@ -3,11 +3,13 @@
 @section('page', trans('ticketit::admin.agent-index-title'))
 
 @section('ticketit_header')
+<!--
 {!! link_to_route(
     $setting->grab('admin_route').'.agent.create',
     trans('ticketit::admin.btn-create-new-agent'), null,
     ['class' => 'btn btn-primary'])
 !!}
+-->
 @stop
 
 @section('ticketit_content_parent_class', 'p-0')
@@ -26,7 +28,7 @@
                     <th>{{ trans('ticketit::admin.table-name') }}</th>
                     <th>Outlets</th>
                     <th>Join Outlets</th>
-                    <th>{{ trans('ticketit::admin.table-remove-agent') }}</th>
+                   <!-- <th>{{ trans('ticketit::admin.table-remove-agent') }}</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -54,7 +56,7 @@
                         @include('ticketit::.admin.agent.listoutlets')            
                         </div>
                     </td>
-                    <td>
+                  <!--  <td>
                         {!! CollectiveForm::open([
                         'method' => 'DELETE',
                         'route' => [
@@ -65,7 +67,7 @@
                         ]) !!}
                         {!! CollectiveForm::submit(trans('ticketit::admin.btn-remove'), ['class' => 'btn btn-danger']) !!}
                         {!! CollectiveForm::close() !!}
-                    </td>
+                    </td> -->
                 </tr>
             @endforeach
             </tbody>
