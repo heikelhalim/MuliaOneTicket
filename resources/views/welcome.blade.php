@@ -199,7 +199,7 @@
                     
                     <br>
                     <img src="{{ asset('/muliaonelogo.jpg') }}"  width="180" height="180" > <br>
-                    <strong>{{ config('app.name') }}</strong>
+                    <strong>{{ config('app.name') }}</strong><br>
                     <strong>Online Job Ticketing System</strong>
 
                     {{-- This is not nice --}}
