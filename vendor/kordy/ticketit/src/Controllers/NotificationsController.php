@@ -117,7 +117,9 @@ class NotificationsController extends Controller
             if (Setting::grab('queue_emails') == 'yes') {
                 Mail::to($to)->queue($mail);
             } else {
-                Mail::to($to)->send($mail);
+                Mail::to($to)
+                      ->cc('helpdesk@muliagroups.com')  
+                      ->send($mail);
             }
         }
     }
