@@ -3,32 +3,35 @@
 @section('page_title', '')
 
 @section('ticketit_header')
-<div>
-    @if($ticket->completed_at)
-        <button type="button" onclick="window.print();" class="btn btn-info">
-         Print
-        </button>
+    <div class="d-print-none">
+        <div>
+            @if($ticket->completed_at)
 
-    @endif
+                <button type="button" onclick="window.print();" class="btn btn-info">
+                Print
+                </button>
 
-    @if(! $ticket->completed_at && $close_perm == 'yes')
-    {{-- Hide Reopen Ticket Button
+            @endif
 
-    @elseif($ticket->completed_at && $reopen_perm == 'yes')
-            {!! link_to_route($setting->grab('main_route').'.reopen', trans('ticketit::lang.reopen-ticket'), $ticket->id,
-                                ['class' => 'btn btn-success']) !!}
-    --}}                                    
-    @endif
+            @if(! $ticket->completed_at && $close_perm == 'yes')
+            {{-- Hide Reopen Ticket Button
 
-    @if($u->isAgent() || $u->isAdmin())
-    {{-- Hide Reopen Edit Button
-        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ticket-edit-modal">
-            {{ trans('ticketit::lang.btn-edit')  }}
-        </button>
-    --}}
-    @endif
+            @elseif($ticket->completed_at && $reopen_perm == 'yes')
+                    {!! link_to_route($setting->grab('main_route').'.reopen', trans('ticketit::lang.reopen-ticket'), $ticket->id,
+                                        ['class' => 'btn btn-success']) !!}
+            --}}                                    
+            @endif
 
-</div>
+            @if($u->isAgent() || $u->isAdmin())
+            {{-- Hide Reopen Edit Button
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ticket-edit-modal">
+                    {{ trans('ticketit::lang.btn-edit')  }}
+                </button>
+            --}}
+            @endif
+        </div>
+    </div>
+
 @stop
 
 @section('ticketit_content')
@@ -39,15 +42,19 @@
 
         @include('ticketit::tickets.partials.ticket_response')
 
+
         @if( $u->isAgent() == false )
   
              @if( !$ticket->completed_at )
                 <p><strong><i>Section 3 : Completion Verification</i></strong></p>
-                {!! link_to_route($setting->grab('main_route').'.complete', trans('ticketit::lang.btn-mark-complete'), $ticket->id,
+                <p>{!! link_to_route($setting->grab('main_route').'.complete', trans('ticketit::lang.btn-mark-complete'), $ticket->id,
                                     ['class' => 'btn btn-success']) !!}
+                </p>
             @endif
 
         @endif
+
+
     
     @elseif($ticket->status->name == 'New' && $u->isAgent())
         
@@ -58,16 +65,47 @@
         @include('ticketit::tickets.editresponse')            
     @endif
 
+    <div class="d-none d-print-block">
+    <p><strong><i>Reporter Details</i></strong></p>
+        <div class="card mb-3">
+            <div class="card-body row">
+                <div class="col-md-12">
+                    <p>
+                        <strong>Reporter Name</strong>{{ trans('ticketit::lang.colon') }}
+                        {{ $ticket->complaint_by }}
+                    </p>
+                    <p>
+                        <strong>Designation</strong>{{ trans('ticketit::lang.colon') }}
+                        <span style="color: {{ $ticket->priority->color }}">
+                        {{ $ticket->position }}
+                        </span>
+                    </p>
+
+                    <p>
+                        <strong>Outlet Address</strong>{{ trans('ticketit::lang.colon') }}
+                        <span style="color: {{ $ticket->priority->color }}">
+                        -
+                        </span>
+                    </p>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection
 
 
 @section('ticketit_extra_content')
-    <h2 class="mt-5">{{ trans('ticketit::lang.comments') }}</h2>
-    @include('ticketit::tickets.partials.comments')
-    {{-- pagination --}}
-    {!! $comments->render("pagination::bootstrap-4") !!}
-    @include('ticketit::tickets.partials.comment_form')
+
+    <div class="d-print-none">
+        <h2 class="mt-5">{{ trans('ticketit::lang.comments') }}</h2>
+        @include('ticketit::tickets.partials.comments')
+        {{-- pagination --}}
+        {!! $comments->render("pagination::bootstrap-4") !!}
+        @include('ticketit::tickets.partials.comment_form')
+    </div>
 @stop
 
 @section('footer')

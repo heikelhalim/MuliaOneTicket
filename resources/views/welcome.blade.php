@@ -200,7 +200,7 @@
                     <br>
                     <img src="{{ asset('/muliaonelogo.jpg') }}"  width="180" height="180" > <br>
                     <strong>{{ config('app.name') }}</strong><br>
-                    <strong>Online Job Ticketing System</strong>
+                    <strong>Online Job Reporting System</strong>
 
                     {{-- This is not nice --}}
                     {{-- However probably the first you'll do after install, --}}

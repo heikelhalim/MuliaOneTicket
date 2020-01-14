@@ -4,9 +4,11 @@
     @include('ticketit::shared.header')
 
     <div class="container">
-        <div class="card mb-3">
-            <div class="card-body">
-                @include('ticketit::shared.nav')
+        <div class="d-print-none">
+            <div class="card mb-3">
+                <div class="card-body">
+                    @include('ticketit::shared.nav')
+                </div>
             </div>
         </div>
         @if(View::hasSection('ticketit_content'))

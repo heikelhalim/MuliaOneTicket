@@ -31,7 +31,7 @@
         </div>
 </div>
 
-<p><strong><i>Section 1 : Report By</i></strong></p>
+<p><strong><i>Section 1 : Report</i></strong></p>
 <div class="card mb-3">
     <div class="card-body row">
         <div class="col-md-6">
