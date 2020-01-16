@@ -82,9 +82,16 @@
                     </p>
 
                     <p>
+                        <strong>Contact No.</strong>{{ trans('ticketit::lang.colon') }}
+                        <span style="color: {{ $ticket->priority->color }}">
+                        {{ $ticket->user->contact_no }}
+                        </span>
+                    </p>
+
+                    <p>
                         <strong>Outlet Address</strong>{{ trans('ticketit::lang.colon') }}
                         <span style="color: {{ $ticket->priority->color }}">
-                        -
+                        {{ $ticket->user->address }}
                         </span>
                     </p>
 

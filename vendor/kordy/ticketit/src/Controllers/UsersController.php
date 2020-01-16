@@ -50,8 +50,9 @@ class UsersController extends Controller
         $this->validate($request, [
             'name'      => 'required',
             'email'     => 'required',
+            'contact_no'   => 'required',
             'password'   => 'required',
-
+            'address'   => 'required',
         ]);
 
         
@@ -75,6 +76,10 @@ class UsersController extends Controller
         {
             $user->ticketit_manager = true;
         }
+
+
+        $user->address = $request->address;
+        $user->contact_no = $request->contact_no;
 
         $user->save();
 
@@ -122,19 +127,22 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
+            'contact_no'   => 'required',
             'password'   => 'required',
+            'address'   => 'required',
         ]);
 
         $user = User::findOrFail($id);
         
+        $user->address = $request->address;
+        $user->contact_no = $request->contact_no;
         $user->password = Hash::make($request->password);
 
         $user->save();
 
         Session::flash('user', 'Password updated.', ['name' => $user->name]);
 
-        Cache::forget('ticketit::users');
-
+ 
         return redirect()->action('\Kordy\Ticketit\Controllers\UsersController@index');
     }
 

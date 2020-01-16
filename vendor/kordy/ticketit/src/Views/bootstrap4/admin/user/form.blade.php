@@ -9,6 +9,17 @@
 </div>
 
 <div class="form-group">
+    {!! CollectiveForm::label('contact_no','Contact No. ' . trans('ticketit::admin.colon'), ['class' => '']) !!}
+    {!! CollectiveForm::text('contact_no', isset($user->contact_no) ? $user->contact_no : null, ['class' => 'form-control']) !!}
+</div>
+
+<div class="form-group">
+    {!! CollectiveForm::label('address','Address' . trans('ticketit::admin.colon'), ['class' => '']) !!}
+    {!! CollectiveForm::textarea('address', isset($user->address) ? $user->address : null, ['class' => 'form-control','rows' => 5]) !!}
+</div>
+
+
+<div class="form-group">
     {!! CollectiveForm::label('type', trans('ticketit::admin.user-create-type') . trans('ticketit::admin.colon'), ['class' => '']) !!} <br>
     <label for="type" class="">Agent  </label>
     {!! CollectiveForm::radio('type', '1', ['class' => 'form-control']) !!}
