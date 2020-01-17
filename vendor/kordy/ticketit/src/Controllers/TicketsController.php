@@ -236,6 +236,19 @@ class TicketsController extends Controller
             'priority_id' => 'required|exists:ticketit_priorities,id',
         ]);
 
+        //generate report no
+
+        $ticket = Ticket::orderBy('id')->first();
+
+        if($ticket == null)
+        {        
+            $reportno = sprintf('%05d', 1); 
+        }
+        else
+        {
+            $reportno = sprintf('%05d', $ticket->id + 1); 
+        }
+
         $user = new User();
         
         $agentmana = User::findOrFail(auth()->user()->id);
@@ -247,7 +260,8 @@ class TicketsController extends Controller
         $ticket->setPurifiedContent($request->get('content'));
         $ticket->setPurifiedReportDetails($request->get('report_details'));
       
-        $ticket->report_no = 'MOE-'.hexdec(uniqid());
+        $ticket->report_no = 'MOE-'.$reportno;
+            
         $ticket->complaint_by = $request->complaint_by;
         $ticket->position = $request->position;
 
