@@ -238,7 +238,7 @@ class TicketsController extends Controller
 
         //generate report no
 
-        $ticket = Ticket::orderBy('id')->first();
+        $ticket = Ticket::orderBy('id','desc')->first();
 
         if($ticket == null)
         {        
