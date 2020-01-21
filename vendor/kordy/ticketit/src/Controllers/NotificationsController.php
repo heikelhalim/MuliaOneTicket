@@ -82,19 +82,25 @@ class NotificationsController extends Controller
          * @var User
          */
         $to = null;
+        $bcc = null; //
 
         if ($type != 'agent') {
             $to = $ticket->user;
 
             if ($ticket->user->email != $notification_owner->email) {
                 $to = $ticket->user;
+                $bcc = $ticket->agent;
+
             }
 
             if ($ticket->agent->email != $notification_owner->email) {
                 $to = $ticket->agent;
+                $bcc = $ticket->user;
+
             }
         } else {
             $to = $ticket->agent;
+            $bcc = $ticket->user;
         }
 
         if (LaravelVersion::lt('5.4')) {
@@ -118,7 +124,8 @@ class NotificationsController extends Controller
                 Mail::to($to)->queue($mail);
             } else {
                 Mail::to($to)
-                      ->cc('helpdesk@muliagroups.com')  
+                      ->cc('helpdesk@muliagroups.com')
+                      ->bcc($bcc)  
                       ->send($mail);
             }
         }
