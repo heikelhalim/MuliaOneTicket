@@ -321,6 +321,9 @@ class TicketsController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        dd(phpinfo());
+
         $ticket = $this->tickets->findOrFail($id);
         $status = Status::where('name', 'Pending Verification')->first();
 

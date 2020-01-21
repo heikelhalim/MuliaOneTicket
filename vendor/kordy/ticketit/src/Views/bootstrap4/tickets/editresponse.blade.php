@@ -8,10 +8,18 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5 class="modal-title" id="ticket-edit-modal-Label">{{ $ticket->subject }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">{{ trans('ticketit::lang.flash-x') }}</span></button>
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">{{ trans('ticketit::lang.flash-x') }}</span></button> -->
+
+                {!! CollectiveForm::submit(trans('ticketit::lang.btn-submit'), ['class' => 'btn btn-primary']) !!}
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('ticketit::lang.btn-close') }}</button>
+                
             </div>
             <div class="modal-body">
+                <div class="form-group">
+                    {!! CollectiveForm::label('subject', 'Subject' . trans('ticketit::lang.colon'), ['class' => '']) !!}
+                    <h5 class="modal-title" id="ticket-edit-modal-Label">{{ $ticket->subject }}</h5>
+                </div>
+
 
                 <div class="form-group">
                     {!! CollectiveForm::hidden('updateflag', 'response') !!}
@@ -35,8 +43,6 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('ticketit::lang.btn-close') }}</button>
-                {!! CollectiveForm::submit(trans('ticketit::lang.btn-submit'), ['class' => 'btn btn-primary']) !!}
             </div>
         </div>
         {!! CollectiveForm::close() !!} 
