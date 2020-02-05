@@ -16,17 +16,10 @@
             <p>
                 <strong>{{ trans('ticketit::lang.in_progress_picture_remarks') }}</strong>{{ trans('ticketit::lang.colon') }}
             </p>
-            <p>
+            <div class="gambar">
                 {!! $ticket->in_progress_html !!}
-            </p>
+            </div>
 
-
-            <p>
-                <strong>{{ trans('ticketit::lang.after_picture_remarks') }}</strong>{{ trans('ticketit::lang.colon') }}
-            </p>
-            <p>
-                {!! $ticket->after_remarks_html !!}
-            </p>
 
 
         </div>
@@ -35,6 +28,16 @@
                 {{ $ticket->agent_id == $u->id ? $u->name : $ticket->agent->name }}
             </p>
 
+<p>
+<br>
+</p>
+
+            <p>
+                <strong>{{ trans('ticketit::lang.after_picture_remarks') }}</strong>{{ trans('ticketit::lang.colon') }}
+            </p>
+            <div class="gambar">
+                {!! $ticket->after_remarks_html !!}
+            </div>
 
 
         </div>

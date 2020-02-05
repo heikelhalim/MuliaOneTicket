@@ -127,10 +127,20 @@
                 }
 
             });
+
+
             $('#category_id').change(function(){
                 var loadpage = "{!! route($setting->grab('main_route').'agentselectlist') !!}/" + $(this).val() + "/{{ $ticket->id }}";
                 $('#agent_id').load(loadpage);
             });
+
+
+            var x = document.getElementsByClassName("gambar");
+
+            x[0].getElementsByTagName("img")[0].style.width = "300px";
+            x[1].getElementsByTagName("img")[0].style.width = "300px";
+
+
             $('#confirmDelete').on('show.bs.modal', function (e) {
                 $message = $(e.relatedTarget).attr('data-message');
                 $(this).find('.modal-body p').text($message);
